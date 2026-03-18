@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShieldCheck, 
@@ -28,13 +28,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
       
-      {/* Simple Tabs for Navigation */}
-      <nav className="sticky bottom-0 bg-black/40 backdrop-blur-xl border-t border-white/5 px-6 py-3 flex justify-between items-center z-50">
-        <NavButton icon={<ShieldCheck size={24} />} active label="Home" />
-        <NavButton icon={<Zap size={24} />} label="Plans" />
-        <NavButton icon={<Users size={24} />} label="Ref" />
-        <NavButton icon={<User size={24} />} label="Profile" />
-      </nav>
+
     </div>
   );
 };
@@ -288,8 +282,8 @@ const App = () => {
 
 const AppContent = () => {
   const navigate = useNavigate();
-  const location = window.location.hash || window.location.pathname;
-  const path = location.replace('#', '') || '/';
+  const location = useLocation();
+  const path = location.pathname;
 
   return (
     <Layout>
